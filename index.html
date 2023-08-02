@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,600;0,6..12,700;1,6..12,400;1,6..12,600;1,6..12,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/output.css" />
+    <title>Dictionary</title>
+  </head>
+  <body class="lightMode">
+    <div class="navigation">
+      <img src="images/book-light.png" alt="logo" class="logo" />
+
+      <div class="fontThemeGrp">
+        <div class="fontSelection">
+          <label for="font"></label>
+          <select id="font">
+            <option value="volvo">Serif</option>
+            <option value="saab">Saab</option>
+            <option value="opel">Opel</option>
+            <option value="audi">Audi</option>
+          </select>
+        </div>
+
+        <img src="images/moon-light.png" alt="themeIcon" class="themeIcon" />
+      </div>
+    </div>
+
+    <div class="searchbar">
+      <input type="text" placeholder="Search for a word..." class="inputText" />
+      <button class="search">
+        <img src="images/search.png" class="searchIcon" alt="search icon" />
+      </button>
+    </div>
+
+    <div class="searchedWordTitle">
+      <div>
+        <h1 class="searchedWord">WORD</h1>
+        <h1 class="phonetics">phonetics</h1>
+      </div>
+
+      <img src="images/play.png" alt="play button" class="playBtn" />
+    </div>
+
+    <!--<div class="searchedResult">
+      <h1 class="partOfSpeech">noun</h1>
+      <div class="meaningGrp">
+        <h1 class="meaningHeading">meaning</h1>
+        <ul class="meaningsList">
+          <li class="meaning">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque,
+            molestias.
+          </li>
+        </ul>
+
+        <div class="synonymsGrp">
+          <h1 class="synonymHeading">Synonyms</h1>
+          <p class="synonyms"></p>
+        </div>
+      </div>
+    </div>-->
+    <script src="index.js"></script>
+  </body>
+</html>

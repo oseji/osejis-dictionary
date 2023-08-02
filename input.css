@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply px-5 lg:px-40 pt-5 transition ease-in-out duration-700 font-Nunito;
+}
+
+select {
+  @apply cursor-pointer bg-transparent outline-none;
+}
+
+/**/
+.darkMode {
+  @apply bg-black;
+}
+.lightMode {
+  @apply bg-white;
+}
+
+.darkModeText {
+  @apply text-white;
+}
+.lightModeText {
+  @apply text-black;
+}
+
+/*NAVIGATION*/
+.navigation {
+  @apply flex flex-row justify-between mb-10;
+}
+
+.logo {
+  @apply h-8;
+}
+
+.fontThemeGrp {
+  @apply flex flex-row items-center gap-3;
+}
+
+.themeIcon {
+  @apply h-7 pl-5 border-l border-slate-400 cursor-pointer;
+}
+
+/*SEARCH BAR*/
+.searchbar {
+  @apply flex flex-row bg-slate-200 rounded-lg mb-10;
+}
+
+.inputText {
+  @apply w-full p-3 bg-slate-200 rounded-l-lg outline-0;
+}
+
+.search {
+  @apply border-0 transition ease-in-out duration-300 rounded-r-lg;
+}
+
+.searchIcon {
+  @apply h-5 px-3;
+}
+
+/*SEARCHED WORD SECTION*/
+.searchedWordTitle {
+  @apply flex flex-row justify-between items-center;
+}
+
+.searchedWord {
+  @apply capitalize text-6xl font-bold mb-3;
+}
+
+.phonetics {
+  @apply text-xl font-semibold text-textPurple z-10;
+}
+
+.playBtn {
+  @apply h-10 rounded-full cursor-pointer;
+}
+
+/*SEARCHED RESULT SECTION*/
+.searchedResult {
+  @apply mt-10;
+}
+
+.partOfSpeech {
+  @apply lowercase font-bold text-xl font-Raleway;
+}
+
+.meaningGrp {
+  @apply mt-2;
+}
+
+.meaningHeading {
+  @apply capitalize text-slate-400 text-xl;
+}
+
+.meaningsList {
+  @apply list-disc pl-10;
+}
+
+.meaning {
+  @apply py-2 lg:w-9/12;
+}
+
+.synonymsGrp {
+  @apply flex flex-row gap-10;
+}
+
+.synonymHeading {
+  @apply text-slate-400 text-xl;
+}
+
+.synonyms {
+  @apply text-textPurple font-semibold text-xl;
+}
