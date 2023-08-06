@@ -15,6 +15,9 @@ module.exports = {
       fontFamily: {
         Raleway: ["Raleway", "serif"],
         Nunito: ["Nunito Sans", "sans-serif"],
+        Slab: ["Roboto Slab", "sans-serif"],
+        Mono: ["Roboto Mono", "sans-serif"],
+        Playfair: ["Playfair Display", "sans-serif"],
       },
     },
   },

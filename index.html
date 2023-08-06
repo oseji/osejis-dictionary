@@ -12,21 +12,32 @@
       href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,600;0,6..12,700;1,6..12,400;1,6..12,600;1,6..12,700&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/output.css" />
     <title>Dictionary</title>
   </head>
-  <body class="lightMode">
+  <body class="lightMode fontNunito">
     <div class="navigation">
       <img src="images/book-light.png" alt="logo" class="logo" />
 
       <div class="fontThemeGrp">
         <div class="fontSelection">
-          <label for="font"></label>
           <select id="font">
-            <option value="volvo">Serif</option>
-            <option value="saab">Saab</option>
-            <option value="opel">Opel</option>
-            <option value="audi">Audi</option>
+            <option value="Nunito">Nunito</option>
+            <option value="Playfair">Playfair display</option>
+            <option value="slab">Roboto slab</option>
+            <option value="mono">Roboto mono</option>
           </select>
         </div>
 
@@ -43,7 +54,7 @@
 
     <div class="searchedWordTitle">
       <div>
-        <h1 class="searchedWord">WORD</h1>
+        <h1 class="searchedWord">RESULT</h1>
         <h1 class="phonetics">phonetics</h1>
       </div>
 

@@ -3,11 +3,25 @@
 @tailwind utilities;
 
 body {
-  @apply px-5 lg:px-40 pt-5 transition ease-in-out duration-700 font-Nunito;
+  @apply px-5 lg:px-40 pt-5 transition ease-in-out duration-700;
 }
 
 select {
   @apply cursor-pointer bg-transparent outline-none;
+}
+
+/*FONT CLASSES*/
+.fontNunito {
+  @apply font-Nunito;
+}
+.fontSlab {
+  @apply font-Slab;
+}
+.fontMono {
+  @apply font-mono;
+}
+.fontPlayfair {
+  @apply font-Playfair;
 }
 
 /**/

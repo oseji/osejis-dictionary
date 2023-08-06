@@ -5,7 +5,7 @@ const screen = document.getElementsByTagName("body")[0];
 const logo = document.querySelector(".logo");
 const searchBtn = document.querySelector(".search");
 const themeIcon = document.querySelector(".themeIcon");
-const fontSelection = document.querySelector(".fontSelection");
+const fontSelection = document.getElementById("font");
 
 const word = document.querySelector(".inputText");
 const searchedWordTitle = document.querySelector(".searchedWordTitle");
@@ -15,9 +15,40 @@ const playMusicBtn = document.querySelector(".playBtn");
 
 let apiSearchWord;
 
-console.log(screen);
+console.log(fontSelection);
 
 //CODE
+//
+//
+//CHANGING FONTS
+fontSelection.addEventListener("click", (e) => {
+  console.log(fontSelection.value);
+  if (fontSelection.value == "Nunito") {
+    screen.classList.add("fontNunito");
+    screen.classList.remove("fontPlayfair");
+    screen.classList.remove("fontSlab");
+    screen.classList.remove("fontMono");
+  }
+  if (fontSelection.value == "Playfair") {
+    screen.classList.add("fontPlayfair");
+    screen.classList.remove("fontSlab");
+    screen.classList.remove("fontNunito");
+    screen.classList.remove("fontMono");
+  }
+  if (fontSelection.value == "slab") {
+    screen.classList.add("fontSlab");
+    screen.classList.remove("fontNunito");
+    screen.classList.remove("fontPlayfair");
+    screen.classList.remove("fontMono");
+  }
+  if (fontSelection.value == "mono") {
+    screen.classList.add("fontMono");
+    screen.classList.remove("fontNunito");
+    screen.classList.remove("fontPlayfair");
+    screen.classList.remove("fontSlab");
+  }
+});
+
 //
 //
 //SWITCHING THEMES
@@ -27,9 +58,10 @@ themeIcon.addEventListener("click", () => {
   screen.classList.toggle("lightMode");
 
   if (screen.classList.contains("darkMode")) {
-    themeIcon.src = `/images/moon-darkMode.png`;
+    themeIcon.src = `/images/sun.png`;
     logo.src = `/images/book-darkMode.png`;
     screen.style.color = "white";
+    word.style.color = "black";
   } else {
     themeIcon.src = `/images/moon-light.png`;
     logo.src = `/images/book-light.png`;
@@ -50,7 +82,11 @@ searchBtn.addEventListener("click", function () {
     .then((res) => {
       console.log(res);
 
-      if (!res.ok) throw new Error(`${res.status}`);
+      if (!res.ok) {
+        displayWord.textContent = `${apiSearchWord} not found`;
+        displayPhonetics.textContent = `not found`;
+        throw new Error(`${res.status}`);
+      }
       return res.json();
     })
     .then((data) => {
