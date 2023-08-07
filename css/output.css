@@ -666,9 +666,15 @@ option {
 }
 
 .searchIcon {
-  height: 1.25rem;
+  height: 1.75rem;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
+}
+
+@media (min-width: 1024px) {
+  .searchIcon {
+    height: 1.25rem;
+  }
 }
 
 /*SEARCHED WORD SECTION*/
