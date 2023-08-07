@@ -13,6 +13,7 @@ const searchedWordTitle = document.querySelector(".searchedWordTitle");
 const displayWord = document.querySelector(".searchedWord");
 const displayPhonetics = document.querySelector(".phonetics");
 const playMusicBtn = document.querySelector(".playBtn");
+const audio = document.querySelector(".audio");
 
 let apiSearchWord;
 
@@ -98,7 +99,7 @@ searchBtn.addEventListener("click", function () {
       displayPhonetics.textContent = `${info.phonetic}`;
 
       info.meanings.forEach((text) => {
-        console.log(text);
+        //console.log(text);
         const html = `
           <div class="searchedResult">
             <h1 class="partOfSpeech">${text.partOfSpeech}</h1>
@@ -118,6 +119,14 @@ searchBtn.addEventListener("click", function () {
           </div>`;
 
         searchedWordTitle.insertAdjacentHTML("afterend", html);
+      });
+
+      //playing audio of the searched word
+      audio.src = `${info.phonetics[0].audio}`;
+      // console.log(info.phonetics[0].audio);
+      // console.log(audio.src);
+      playMusicBtn.addEventListener("click", () => {
+        audio.play();
       });
     })
     .catch((err) => console.error(err));
