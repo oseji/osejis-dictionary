@@ -10,6 +10,10 @@ select {
   @apply cursor-pointer bg-transparent outline-none;
 }
 
+option {
+  @apply text-black;
+}
+
 /*FONT CLASSES*/
 .fontNunito {
   @apply font-Nunito;

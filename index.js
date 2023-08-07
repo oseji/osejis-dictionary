@@ -6,6 +6,7 @@ const logo = document.querySelector(".logo");
 const searchBtn = document.querySelector(".search");
 const themeIcon = document.querySelector(".themeIcon");
 const fontSelection = document.getElementById("font");
+const fontOptions = document.getElementsByTagName("option");
 
 const word = document.querySelector(".inputText");
 const searchedWordTitle = document.querySelector(".searchedWordTitle");
@@ -15,13 +16,13 @@ const playMusicBtn = document.querySelector(".playBtn");
 
 let apiSearchWord;
 
-console.log(fontSelection);
+console.log(fontOptions);
 
 //CODE
 //
 //
 //CHANGING FONTS
-fontSelection.addEventListener("click", (e) => {
+fontSelection.addEventListener("change", (e) => {
   console.log(fontSelection.value);
   if (fontSelection.value == "Nunito") {
     screen.classList.add("fontNunito");
