@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-black text-white;
+}
+
+.App {
+  @apply px-5 md:px-20 lg:px-60 py-5 md:py-10;
+}
+
+header {
+  @apply flex flex-row justify-between items-center  mb-14;
+}
+
+.headerGrp {
+  @apply flex flex-row items-center;
+}
+
+#selectFonts {
+  @apply mr-7 text-black rounded-lg p-1 cursor-pointer;
+}
+
+.themeGrp {
+  @apply pl-7 border-l border-slate-200 flex flex-row items-center gap-2;
+}
+
+.slider {
+  @apply p-1 w-11 rounded-full bg-slate-600;
+}
+
+.ball {
+  @apply h-3 w-3 bg-white  rounded-full cursor-pointer transition ease-in-out duration-300;
+}
+.animateBall {
+  @apply translate-x-end;
+}
+
+/* searchSection */
+.searchSection {
+  @apply w-11/12 md:w-auto mx-auto  rounded-lg flex flex-row items-center justify-between mb-10 md:mb-0 bg-white hover:scale-105 transition ease-in-out duration-200;
+}
+
+.textInput {
+  @apply text-black focus:outline-none p-2 rounded-lg  md:w-full;
+}
+
+.searchBtn {
+  @apply px-2;
+}
+
+/* loadingScreen */
+.loadingScreen {
+  @apply h-halfScreen mt-5  flex flex-col justify-center items-center gap-10;
+}
+
+.loadingBall {
+  @apply h-3 w-3 rounded-full bg-white;
+}
+
+/* resultsScreen */
+.resultsScreen {
+  @apply mt-5;
+}
+
+.searchedWordGrp {
+  @apply flex flex-row justify-between items-center;
+}
+
+.searchedWord {
+  @apply text-6xl font-bold capitalize;
+}
+
+.phonetics {
+  @apply text-2xl font-semibold text-purple-700;
+}
+
+.playSoundBtn {
+  @apply bg-purple-500 rounded-full p-4;
+}
+
+.resultContainer {
+  @apply mt-10;
+}
+
+.partOfSpeech {
+  @apply font-semibold mb-5 text-lg;
+}
+
+.resultSubHeading {
+  @apply text-slate-500 font-semibold text-lg;
+}
+
+.definitionContainer {
+  @apply flex flex-col gap-1 mb-5;
+}
+
+.definition {
+  @apply list-disc ml-10;
+}
+
+.synonymGrp {
+  @apply flex flex-row gap-5 items-center;
+}
+
+.synonymsContainer {
+  @apply flex flex-row items-center gap-2 text-purple-600 font-semibold overflow-x-scroll;
+}
+
+.synonym {
+  @apply w-auto;
+}
