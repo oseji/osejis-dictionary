@@ -270,12 +270,36 @@ function App() {
             {data.map((element, index) => (
               <div className="resultContainer" key={index}>
                 {element.meanings.map((element, index) => (
-                  <h3 className="partOfSpeech" key={index}>
-                    {element.partOfSpeech}
-                  </h3>
+                  <div className="loadedResult">
+                    <h3 className="partOfSpeech" key={index}>
+                      {element.partOfSpeech}
+                    </h3>
+
+                    <h3 className="resultSubHeading">Meaning</h3>
+
+                    <ul className="definitionContainer" key={index}>
+                      {element.definitions.map((element, index) => (
+                        <li className="definition" key={index}>
+                          {element.definition}
+                        </li>
+                      ))}
+                    </ul>
+
+                    <div className="synonymGrp">
+                      <h3 className="resultSubHeading">Synonyms</h3>
+
+                      <ul className="synonymsContainer" key={index}>
+                        {element.synonyms.map((element, index) => (
+                          <li className="synonym" key={index}>
+                            {element}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
                 ))}
 
-                <h3 className="resultSubHeading">Meaning</h3>
+                {/* <h3 className="resultSubHeading">Meaning</h3>
 
                 {element.meanings.map((element, index) => (
                   <ul className="definitionContainer" key={index}>
@@ -285,9 +309,9 @@ function App() {
                       </li>
                     ))}
                   </ul>
-                ))}
+                ))} */}
 
-                <div className="synonymGrp">
+                {/* <div className="synonymGrp">
                   <h3 className="resultSubHeading">Synonyms</h3>
 
                   {element.meanings.map((element, index) => (
@@ -299,7 +323,7 @@ function App() {
                       ))}
                     </ul>
                   ))}
-                </div>
+                </div> */}
               </div>
             ))}
           </div>

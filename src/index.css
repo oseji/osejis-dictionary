@@ -69,7 +69,7 @@ header {
 }
 
 .searchedWord {
-  @apply text-6xl font-bold capitalize;
+  @apply text-4xl md:text-6xl font-bold capitalize;
 }
 
 .phonetics {
@@ -82,6 +82,10 @@ header {
 
 .resultContainer {
   @apply mt-10;
+}
+
+.loadedResult {
+  @apply mb-10;
 }
 
 .partOfSpeech {
@@ -107,6 +111,10 @@ header {
 .synonymsContainer {
   @apply flex flex-row items-center gap-2 text-purple-600 font-semibold overflow-x-scroll;
 }
+
+/* .synonymsContainer{
+  @apply scroll
+} */
 
 .synonym {
   @apply w-auto;
