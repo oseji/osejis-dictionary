@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 function App() {
   const iconBook = (
     <svg
-      class="w-6 h-6 text-gray-800 dark:text-white"
+      className="w-6 h-6 text-gray-800 dark:text-white"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
@@ -24,7 +24,7 @@ function App() {
 
   const iconMoon = (
     <svg
-      class="w-6 h-6 text-gray-800 dark:text-white"
+      className="w-6 h-6 text-gray-800 dark:text-white"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
@@ -34,9 +34,9 @@ function App() {
         initial={{ pathLength: 0 }}
         animate={{ pathLength: 1, transition: { duration: 3 } }}
         stroke="#9EACAC"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
         d="M8.509 5.75c0-1.493.394-2.96 1.144-4.25h-.081a8.5 8.5 0 1 0 7.356 12.746A8.5 8.5 0 0 1 8.509 5.75Z"
       />
     </svg>
@@ -44,17 +44,19 @@ function App() {
 
   const iconSun = (
     <svg
-      class="w-6 h-6 text-gray-800 dark:text-white"
+      className="w-6 h-6 text-gray-800 dark:text-white"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 20 20"
     >
-      <path
+      <motion.path
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: 1, transition: { duration: 3 } }}
         stroke="#9EACAC"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
         d="M10 3V1m0 18v-2M5.05 5.05 3.636 3.636m12.728 12.728L14.95 14.95M3 10H1m18 0h-2M5.05 14.95l-1.414 1.414M16.364 3.636 14.95 5.05M14 10a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"
       />
     </svg>
@@ -62,7 +64,7 @@ function App() {
 
   const iconPlay = (
     <svg
-      class="w-6 h-6 text-gray-800 dark:text-white"
+      className="w-6 h-6 text-gray-800 dark:text-white"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
@@ -70,33 +72,17 @@ function App() {
     >
       <path
         stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
         d="M1 1.984v14.032a1 1 0 0 0 1.506.845l12.006-7.016a.974.974 0 0 0 0-1.69L2.506 1.139A1 1 0 0 0 1 1.984Z"
-      />
-    </svg>
-  );
-
-  const iconPause = (
-    <svg
-      class="w-6 h-6 text-gray-800 dark:text-white"
-      aria-hidden="true"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="currentColor"
-      viewBox="0 0 10 16"
-    >
-      <path
-        fill-rule="evenodd"
-        d="M0 .8C0 .358.32 0 .714 0h1.429c.394 0 .714.358.714.8v14.4c0 .442-.32.8-.714.8H.714a.678.678 0 0 1-.505-.234A.851.851 0 0 1 0 15.2V.8Zm7.143 0c0-.442.32-.8.714-.8h1.429c.19 0 .37.084.505.234.134.15.209.354.209.566v14.4c0 .442-.32.8-.714.8H7.857c-.394 0-.714-.358-.714-.8V.8Z"
-        clip-rule="evenodd"
       />
     </svg>
   );
 
   const iconSearch = (
     <svg
-      class="w-6 h-6 text-gray-800 dark:text-white"
+      className="w-6 h-6 text-gray-800 dark:text-white"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
@@ -106,9 +92,9 @@ function App() {
         initial={{ pathLength: 0 }}
         animate={{ pathLength: 1, transition: { duration: 3 } }}
         stroke="#E750E2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
         d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
       />
     </svg>
@@ -122,11 +108,9 @@ function App() {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [apiError, setApiError] = useState(null);
-  const [hasSearched, setHasSearched] = useState(false);
 
   const [searchedWord, setSearchedWord] = useState("");
   const [audioUrl, setAudioUrl] = useState(null);
-  const [isPlaying, setIsPlaying] = useState(false);
   const [phonetics, setPhonetics] = useState("");
 
   const [iconTheme, setIconTheme] = useState(iconSun);
@@ -147,6 +131,9 @@ function App() {
       const data = await response.json();
       setData(data);
       setAudioUrl(data[0].phonetics[0].audio);
+      setPhonetics(data[0].phonetic);
+      setApiError(null);
+
       console.log(data);
     } catch (error) {
       //alert(error);
@@ -168,8 +155,6 @@ function App() {
     searchSection.classList.toggle("bg-slate-200");
 
     sliderBall.classList.toggle("animateBall");
-
-    console.log(sliderBall, App);
 
     if (isThemeToggled) {
       setIconTheme(iconSun);
@@ -219,13 +204,7 @@ function App() {
     } else {
       audioPlayer.pause();
     }
-
-    //isPlaying ? false : true;
   };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   return (
     <div className="App darkMode font-roboto" ref={AppRef}>
@@ -256,7 +235,6 @@ function App() {
         onSubmit={(e) => {
           e.preventDefault();
           fetchData();
-          //setHasSearched(true);
         }}
       >
         <input
@@ -266,12 +244,12 @@ function App() {
           onChange={(e) => setSearchedWord(e.target.value)}
           onSubmit={() => {
             fetchData();
-            setHasSearched(true);
           }}
         />
         <button className="searchBtn">{iconSearch}</button>
       </form>
 
+      {/* IF API DATA IS LOADING */}
       {isLoading && (
         <div className="loadingScreen">
           <motion.div
@@ -315,16 +293,26 @@ function App() {
         </div>
       )}
 
+      {/* IF INPUT FIELD IS EMPTY */}
       {searchedWord === "" && (
         <div className="loadingScreen">
           <h1 className="text-4xl font-bold">Search for a word</h1>
         </div>
       )}
 
+      {/* IF SEARCHED WORD IS NOT FOUND */}
+      {apiError !== null && (
+        <div className="loadingScreen">
+          <h1 className="text-4xl font-bold">Word not found</h1>
+        </div>
+      )}
+
+      {/* IF WORD HAS BEEN SEARCHED FOR AND DATA IS FINISHED LOADING */}
       {!isLoading &&
         searchedWord !== "" &&
         data !== null &&
-        data !== undefined && (
+        data !== undefined &&
+        apiError === null && (
           <div className="resultsScreen">
             <div className="searchedWordGrp">
               <div>
@@ -332,15 +320,7 @@ function App() {
                 <div className="phonetics">{phonetics}</div>
               </div>
 
-              <audio
-                ref={audioRef}
-                //controls
-                // autoPlay={isPlaying} // Autoplay if isPlaying is true
-                // onPlay={() => setIsPlaying(true)}
-                // onPause={() => setIsPlaying(false)}
-                // onEnded={() => setIsPlaying(false)}
-                src={audioUrl}
-              />
+              <audio ref={audioRef} src={audioUrl} />
 
               <button className="playSoundBtn" onClick={toggleAudio}>
                 {iconPlay}
