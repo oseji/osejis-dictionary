@@ -102,7 +102,7 @@ function App() {
 
   const AppRef = useRef(null);
   const searchSectionRef = useRef(null);
-  const audioRef = useState(null);
+  const audioRef = useRef(null);
   const sliderBallRef = useRef(null);
 
   const [data, setData] = useState(null);
@@ -242,11 +242,10 @@ function App() {
           className="textInput"
           value={searchedWord}
           onChange={(e) => setSearchedWord(e.target.value)}
-          onSubmit={() => {
-            fetchData();
-          }}
         />
-        <button className="searchBtn">{iconSearch}</button>
+        <button className="searchBtn" onClick={fetchData}>
+          {iconSearch}
+        </button>
       </form>
 
       {/* IF API DATA IS LOADING */}
@@ -266,16 +265,7 @@ function App() {
             className="loadingBall mb-10"
           ></motion.div>
 
-          <motion.h1
-            // initial={{ opacity: 0 }}
-            // animate={{
-            //   opacity: 1,
-            //   transition: { duration: 1, repeat: Infinity, yoyo: Infinity },
-            // }}
-            className="text-4xl font-bold"
-          >
-            LOADING...
-          </motion.h1>
+          <motion.h1 className="text-4xl font-bold">LOADING...</motion.h1>
 
           <motion.div
             animate={{
@@ -330,7 +320,15 @@ function App() {
             {data.map((element, index) => (
               <div className="resultContainer" key={index}>
                 {element.meanings.map((meaning, index) => (
-                  <div className="loadedResult">
+                  <motion.div
+                    initial={{ opacity: 0, x: 100 }}
+                    whileInView={{
+                      opacity: 1,
+                      x: 0,
+                      transition: { duration: 0.5 },
+                    }}
+                    className="loadedResult"
+                  >
                     <h3 className="partOfSpeech" key={index}>
                       {meaning.partOfSpeech}
                     </h3>
@@ -356,34 +354,8 @@ function App() {
                         ))}
                       </ul>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
-
-                {/* <h3 className="resultSubHeading">Meaning</h3>
-
-                {element.meanings.map((element, index) => (
-                  <ul className="definitionContainer" key={index}>
-                    {element.definitions.map((element, index) => (
-                      <li className="definition" key={index}>
-                        {element.definition}
-                      </li>
-                    ))}
-                  </ul>
-                ))} */}
-
-                {/* <div className="synonymGrp">
-                  <h3 className="resultSubHeading">Synonyms</h3>
-
-                  {element.meanings.map((element, index) => (
-                    <ul className="synonymsContainer" key={index}>
-                      {element.synonyms.map((element, index) => (
-                        <li className="synonym" key={index}>
-                          {element}
-                        </li>
-                      ))}
-                    </ul>
-                  ))}
-                </div> */}
               </div>
             ))}
           </div>
