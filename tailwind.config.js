@@ -6,8 +6,15 @@ export default {
       height: {
         halfScreen: "60dvh",
       },
+      minHeight: { deviceScreen: "100dvh" },
       translate: {
         end: "200%",
+      },
+      fontFamily: {
+        poppins: ["Poppins", "sans - serif"],
+        raleway: ["Raleway", "sans - serif"],
+        playfair: ["Playfair Display", "serif"],
+        roboto: ["Roboto Slab", "serif"],
       },
     },
   },

@@ -1,4 +1,4 @@
-import { useState, useEffect, useReducer, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
 function App() {
@@ -114,6 +114,9 @@ function App() {
     </svg>
   );
 
+  const AppRef = useRef(null);
+  const searchSectionRef = useRef(null);
+  const audioRef = useState(null);
   const sliderBallRef = useRef(null);
 
   const [data, setData] = useState(null);
@@ -122,10 +125,12 @@ function App() {
   const [hasSearched, setHasSearched] = useState(false);
 
   const [searchedWord, setSearchedWord] = useState("");
-  const [pronunciation, setPronunciation] = useState(null);
+  const [audioUrl, setAudioUrl] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [phonetics, setPhonetics] = useState("");
 
-  const [iconTheme, setIconTheme] = useState(iconMoon);
+  const [iconTheme, setIconTheme] = useState(iconSun);
+  const [isThemeToggled, setIsThemeToggled] = useState(false);
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -136,11 +141,12 @@ function App() {
       );
 
       if (!response.ok) {
-        throw new Error("Something went wrong with the response");
+        throw new Error("Word not found...");
       }
 
       const data = await response.json();
       setData(data);
+      setAudioUrl(data[0].phonetics[0].audio);
       console.log(data);
     } catch (error) {
       //alert(error);
@@ -151,9 +157,70 @@ function App() {
   };
 
   const toggleTheme = () => {
+    const App = AppRef.current;
+    const searchSection = searchSectionRef.current;
     const sliderBall = sliderBallRef.current;
+
+    App.classList.toggle("darkMode");
+    App.classList.toggle("lightMode");
+
+    searchSection.classList.toggle("bg-white");
+    searchSection.classList.toggle("bg-slate-200");
+
     sliderBall.classList.toggle("animateBall");
-    console.log(sliderBall);
+
+    console.log(sliderBall, App);
+
+    if (isThemeToggled) {
+      setIconTheme(iconSun);
+      setIsThemeToggled(false);
+    }
+    if (!isThemeToggled) {
+      setIconTheme(iconMoon);
+      setIsThemeToggled(true);
+    }
+
+    // iconTheme === iconMoon ? setIconTheme(iconSun) : setIconTheme(iconMoon);
+  };
+
+  const toggleFont = (e) => {
+    const App = AppRef.current;
+
+    if (e.target.value === "roboto") {
+      App.classList.add("font-roboto");
+      App.classList.remove("font-playfair");
+      App.classList.remove("font-raleway");
+      App.classList.remove("font-poppins");
+    }
+    if (e.target.value === "playfair") {
+      App.classList.add("font-playfair");
+      App.classList.remove("font-roboto");
+      App.classList.remove("font-raleway");
+      App.classList.remove("font-poppins");
+    }
+    if (e.target.value === "raleway") {
+      App.classList.add("font-raleway");
+      App.classList.remove("font-playfair");
+      App.classList.remove("font-roboto");
+      App.classList.remove("font-poppins");
+    }
+    if (e.target.value === "poppins") {
+      App.classList.add("font-poppins");
+      App.classList.remove("font-playfair");
+      App.classList.remove("font-raleway");
+      App.classList.remove("font-roboto");
+    }
+  };
+
+  const toggleAudio = () => {
+    const audioPlayer = audioRef.current;
+    if (audioPlayer.paused) {
+      audioPlayer.play();
+    } else {
+      audioPlayer.pause();
+    }
+
+    //isPlaying ? false : true;
   };
 
   useEffect(() => {
@@ -161,16 +228,16 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
+    <div className="App darkMode font-roboto" ref={AppRef}>
       <header>
         <div className="iconBook">{iconBook}</div>
 
         <div className="headerGrp">
-          <select name="" id="selectFonts">
-            <option value="lorem">lorem</option>
-            <option value="lorem">lorem</option>
-            <option value="lorem">lorem</option>
-            <option value="lorem">lorem</option>
+          <select name="" id="selectFonts" onClick={toggleFont}>
+            <option value="roboto">Roboto</option>
+            <option value="raleway">Raleway</option>
+            <option value="playfair">Playfair</option>
+            <option value="poppins">Poppins</option>
           </select>
 
           <div className="themeGrp">
@@ -184,7 +251,8 @@ function App() {
       </header>
 
       <form
-        className="searchSection"
+        className="searchSection bg-white"
+        ref={searchSectionRef}
         onSubmit={(e) => {
           e.preventDefault();
           fetchData();
@@ -264,21 +332,33 @@ function App() {
                 <div className="phonetics">{phonetics}</div>
               </div>
 
-              <button className="playSoundBtn">{iconPlay}</button>
+              <audio
+                ref={audioRef}
+                //controls
+                // autoPlay={isPlaying} // Autoplay if isPlaying is true
+                // onPlay={() => setIsPlaying(true)}
+                // onPause={() => setIsPlaying(false)}
+                // onEnded={() => setIsPlaying(false)}
+                src={audioUrl}
+              />
+
+              <button className="playSoundBtn" onClick={toggleAudio}>
+                {iconPlay}
+              </button>
             </div>
 
             {data.map((element, index) => (
               <div className="resultContainer" key={index}>
-                {element.meanings.map((element, index) => (
+                {element.meanings.map((meaning, index) => (
                   <div className="loadedResult">
                     <h3 className="partOfSpeech" key={index}>
-                      {element.partOfSpeech}
+                      {meaning.partOfSpeech}
                     </h3>
 
                     <h3 className="resultSubHeading">Meaning</h3>
 
                     <ul className="definitionContainer" key={index}>
-                      {element.definitions.map((element, index) => (
+                      {meaning.definitions.map((element, index) => (
                         <li className="definition" key={index}>
                           {element.definition}
                         </li>
@@ -289,7 +369,7 @@ function App() {
                       <h3 className="resultSubHeading">Synonyms</h3>
 
                       <ul className="synonymsContainer" key={index}>
-                        {element.synonyms.map((element, index) => (
+                        {meaning.synonyms.map((element, index) => (
                           <li className="synonym" key={index}>
                             {element}
                           </li>
@@ -328,92 +408,8 @@ function App() {
             ))}
           </div>
         )}
-
-      {/* {!isLoading && (
-        <div className="resultsScreen">
-          <div className="searchedWordGrp">
-            <div>
-              <h1 className="searchedWord">{searchedWord}</h1>
-              <div className="phonetics">{phonetics}</div>
-            </div>
-
-            <button className="playSoundBtn">{iconPlay}</button>
-          </div>
-        </div>
-      )} */}
     </div>
   );
-}
-
-{
-  /* <div className="searchedWordGrp">
-            <div>
-              <h1 className="searchedWord">{searchedWord}</h1>
-              <div className="phonetics">{phonetics}</div>
-            </div>
-
-            <button className="playSoundBtn">{iconPlay}</button>
-          </div>
-
-          <div className="resultContainer" key={index}>
-            <h3 className="partOfSpeech">{element.meanings.partOfSpeech}</h3>
-
-            <h3 className="resultSubHeading">Meaning</h3>
-            <ul className="definitionContainer">
-              <li className="definition">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit,
-                dignissimos!
-              </li>
-            </ul>
-            <div className="synonymGrp">
-              <h3 className="resultSubHeading">Synonyms</h3>
-              <ul className="synonymsContainer">
-                <li className="synonym">lorem</li>
-              </ul>
-            </div>
-          </div> */
-}
-
-{
-  /* {data.map((element, index) => (
-            <div className="resultContainer" key={index}>
-              <h3 className="partOfSpeech">{element.meanings.partOfSpeech}</h3>
-
-              <h3 className="resultSubHeading">Meaning</h3>
-              <ul className="definitionContainer">
-                <li className="definition">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Odit, dignissimos!
-                </li>
-              </ul>
-              <div className="synonymGrp">
-                <h3 className="resultSubHeading">Synonyms</h3>
-                <ul className="synonymsContainer">
-                  <li className="synonym">lorem</li>
-                </ul>
-              </div>
-            </div>
-          ))} */
-}
-
-{
-  /* <div className="resultContainer">
-            <h3 className="partOfSpeech">noun</h3>
-
-            <h3 className="resultSubHeading">Meaning</h3>
-            <ul className="definitionContainer">
-              <li className="definition">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit,
-                dignissimos!
-              </li>
-            </ul>
-            <div className="synonymGrp">
-              <h3 className="resultSubHeading">Synonyms</h3>
-              <ul className="synonymsContainer">
-                <li className="synonym">lorem</li>
-              </ul>
-            </div>
-          </div> */
 }
 
 export default App;
