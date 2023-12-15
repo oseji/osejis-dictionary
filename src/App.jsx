@@ -101,7 +101,6 @@ function App() {
   );
 
   const AppRef = useRef(null);
-  const searchSectionRef = useRef(null);
   const audioRef = useRef(null);
   const sliderBallRef = useRef(null);
 
@@ -113,8 +112,9 @@ function App() {
   const [audioUrl, setAudioUrl] = useState(null);
   const [phonetics, setPhonetics] = useState("");
 
-  const [iconTheme, setIconTheme] = useState(iconSun);
   const [isThemeToggled, setIsThemeToggled] = useState(false);
+  const iconTheme = isThemeToggled ? iconMoon : iconSun;
+  // const [iconTheme, setIconTheme] = useState(iconSun);
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -144,28 +144,10 @@ function App() {
   };
 
   const toggleTheme = () => {
-    const App = AppRef.current;
-    const searchSection = searchSectionRef.current;
     const sliderBall = sliderBallRef.current;
-
-    App.classList.toggle("darkMode");
-    App.classList.toggle("lightMode");
-
-    searchSection.classList.toggle("bg-white");
-    searchSection.classList.toggle("bg-slate-200");
-
     sliderBall.classList.toggle("animateBall");
 
-    if (isThemeToggled) {
-      setIconTheme(iconSun);
-      setIsThemeToggled(false);
-    }
-    if (!isThemeToggled) {
-      setIconTheme(iconMoon);
-      setIsThemeToggled(true);
-    }
-
-    // iconTheme === iconMoon ? setIconTheme(iconSun) : setIconTheme(iconMoon);
+    isThemeToggled ? setIsThemeToggled(false) : setIsThemeToggled(true);
   };
 
   const toggleFont = (e) => {
@@ -207,7 +189,10 @@ function App() {
   };
 
   return (
-    <div className="App darkMode font-roboto" ref={AppRef}>
+    <div
+      className={`App font-roboto ${isThemeToggled ? "darkMode" : "lightMode"}`}
+      ref={AppRef}
+    >
       <header>
         <div className="iconBook">{iconBook}</div>
 
@@ -230,8 +215,9 @@ function App() {
       </header>
 
       <form
-        className="searchSection bg-white"
-        ref={searchSectionRef}
+        className={`searchSection ${
+          isThemeToggled ? "bg-white" : "bg-slate-200"
+        }`}
         onSubmit={(e) => {
           e.preventDefault();
           fetchData();
