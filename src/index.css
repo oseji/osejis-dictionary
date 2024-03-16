@@ -8,7 +8,7 @@
 @tailwind utilities;
 
 .App {
-  @apply min-h-deviceScreen px-5 md:px-20 lg:px-60 py-5 md:py-10 transition ease-in-out duration-300;
+  @apply min-h-deviceScreen px-5 md:px-20 lg:px-60 py-5 md:py-10 transition ease-in-out duration-300 overflow-hidden;
 }
 
 .lightMode {
@@ -24,6 +24,10 @@ header {
 
 .headerGrp {
   @apply flex flex-row items-center;
+}
+
+.icon {
+  @apply h-6;
 }
 
 #selectFonts {

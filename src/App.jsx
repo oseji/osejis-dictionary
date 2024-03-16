@@ -1,105 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
+import iconBook from "./assets/iconBook.svg";
+import iconSearch from "./assets/iconSearch.svg";
+import iconPlay from "./assets/iconPlay.svg";
+import iconMoon from "./assets/iconMoon.svg";
+import iconSun from "./assets/iconSun.svg";
+
 function App() {
-  const iconBook = (
-    <svg
-      className="w-6 h-6 text-gray-800 dark:text-white"
-      aria-hidden="true"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 16 20"
-    >
-      <motion.path
-        initial={{ pathLength: 0 }}
-        animate={{ pathLength: 1, transition: { duration: 3 } }}
-        stroke="#9EACAC"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M1 17V2a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a2 2 0 0 0-2 2Zm0 0a2 2 0 0 0 2 2h12M5 15V1m8 18v-4"
-      />
-    </svg>
-  );
-
-  const iconMoon = (
-    <svg
-      className="w-6 h-6 text-gray-800 dark:text-white"
-      aria-hidden="true"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 18 20"
-    >
-      <motion.path
-        initial={{ pathLength: 0 }}
-        animate={{ pathLength: 1, transition: { duration: 3 } }}
-        stroke="#9EACAC"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M8.509 5.75c0-1.493.394-2.96 1.144-4.25h-.081a8.5 8.5 0 1 0 7.356 12.746A8.5 8.5 0 0 1 8.509 5.75Z"
-      />
-    </svg>
-  );
-
-  const iconSun = (
-    <svg
-      className="w-6 h-6 text-gray-800 dark:text-white"
-      aria-hidden="true"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 20 20"
-    >
-      <motion.path
-        initial={{ pathLength: 0 }}
-        animate={{ pathLength: 1, transition: { duration: 3 } }}
-        stroke="#9EACAC"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M10 3V1m0 18v-2M5.05 5.05 3.636 3.636m12.728 12.728L14.95 14.95M3 10H1m18 0h-2M5.05 14.95l-1.414 1.414M16.364 3.636 14.95 5.05M14 10a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"
-      />
-    </svg>
-  );
-
-  const iconPlay = (
-    <svg
-      className="w-6 h-6 text-gray-800 dark:text-white"
-      aria-hidden="true"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 16 18"
-    >
-      <path
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M1 1.984v14.032a1 1 0 0 0 1.506.845l12.006-7.016a.974.974 0 0 0 0-1.69L2.506 1.139A1 1 0 0 0 1 1.984Z"
-      />
-    </svg>
-  );
-
-  const iconSearch = (
-    <svg
-      className="w-6 h-6 text-gray-800 dark:text-white"
-      aria-hidden="true"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 20 20"
-    >
-      <motion.path
-        initial={{ pathLength: 0 }}
-        animate={{ pathLength: 1, transition: { duration: 3 } }}
-        stroke="#E750E2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-      />
-    </svg>
-  );
-
   const AppRef = useRef(null);
   const audioRef = useRef(null);
   const sliderBallRef = useRef(null);
@@ -114,7 +22,6 @@ function App() {
 
   const [isThemeToggled, setIsThemeToggled] = useState(false);
   const iconTheme = isThemeToggled ? iconMoon : iconSun;
-  // const [iconTheme, setIconTheme] = useState(iconSun);
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -194,7 +101,7 @@ function App() {
       ref={AppRef}
     >
       <header>
-        <div className="iconBook">{iconBook}</div>
+        <img src={iconBook} alt="book icon" className="icon" />
 
         <div className="headerGrp">
           <select name="" id="selectFonts" onClick={toggleFont}>
@@ -209,7 +116,7 @@ function App() {
               <div className="ball" ref={sliderBallRef}></div>
             </div>
 
-            <div className="iconTheme">{iconTheme}</div>
+            <img src={iconTheme} alt="theme icon" className="icon" />
           </div>
         </div>
       </header>
@@ -230,7 +137,7 @@ function App() {
           onChange={(e) => setSearchedWord(e.target.value)}
         />
         <button className="searchBtn" onClick={fetchData}>
-          {iconSearch}
+          <img src={iconSearch} className="icon" alt="search icon" />
         </button>
       </form>
 
@@ -299,7 +206,7 @@ function App() {
               <audio ref={audioRef} src={audioUrl} />
 
               <button className="playSoundBtn" onClick={toggleAudio}>
-                {iconPlay}
+                <img src={iconPlay} alt="play icon" className="icon" />
               </button>
             </div>
 
@@ -314,6 +221,7 @@ function App() {
                       transition: { duration: 0.5 },
                     }}
                     className="loadedResult"
+                    key={index}
                   >
                     <h3 className="partOfSpeech" key={index}>
                       {meaning.partOfSpeech}
